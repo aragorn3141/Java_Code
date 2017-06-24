@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="assignment5" default="compile" basedir=".">
+    <description>
+        my build file using assignment 4
+    </description>
+
+  <!-- set global properties for this build -->
+  <property name="dir.src" value="src"/>
+  <property name="dir.build" value="build"/>
+  <property name="dir.dist"  value="dist"/>
+
+  <!-- Creates the output directories -->
+  <target name="prepare">
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${dir.build}"/>
+    <mkdir dir="${dir.dist}"/>
+  </target>
+
+  <target name="compile" depends="prepare"
+          description="Compile all source code.">
+    <!-- Compile the java code from ${dir.src} into ${dir.build} -->
+    <javac includeantruntime="false" srcdir="${dir.src}" destdir="${dir.build}"/>
+  </target>
+
+  <target name="jar" depends="compile"
+          description="Generates assignment5.jar in the 'dist' directory.">
+    <!-- Put everything in ${dir.build} into the assignment5.jar file -->
+    <jar jarfile="${dir.dist}/assignment5.jar" basedir="${dir.build}">
+        <manifest>
+            <attribute name="Main-Class" value="assignment5.KnightsTourTest"/>
+        </manifest>       
+    </jar>
+  </target>
+
+  <target name="clean"
+          description="Remove all generated files.">
+    <!-- Delete the ${dir.build} and ${dir.dist} directory trees -->
+    <delete dir="${dir.build}"/>
+    <delete dir="${dir.dist}"/>
+  </target>
+</project>
